@@ -1,0 +1,5 @@
+# Additional packages needed for model evaluation
+# (beyond what's in conda_environment.yml)
+matplotlib>=3.5.0
+seaborn>=0.11.0
+scipy>=1.7.0

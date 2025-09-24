@@ -1,0 +1,168 @@
+{
+  "dataset_info": {
+    "total_samples": 21613,
+    "features": 33,
+    "train_samples": 16209,
+    "test_samples": 5404,
+    "target_min": 75000.0,
+    "target_max": 7700000.0,
+    "target_mean": 540088.1417665294,
+    "target_std": 367127.19648269983
+  },
+  "test_performance": {
+    "mae": 102044.6961880089,
+    "mse": 40666526377.03607,
+    "rmse": 201659.43165901286,
+    "r2": 0.7281424411798048,
+    "mape": 17.90056327686975,
+    "median_ae": 54500.0
+  },
+  "cross_validation": {
+    "neg_mean_absolute_error": {
+      "mean": -96894.08344828834,
+      "std": 2787.6704803931793,
+      "scores": [
+        -100047.71163543835,
+        -94369.65015035855,
+        -93417.52070321536,
+        -96529.31008792226,
+        -100106.22466450717
+      ]
+    },
+    "neg_mean_squared_error": {
+      "mean": -34390244702.96155,
+      "std": 5416352957.33951,
+      "scores": [
+        -44078113252.0835,
+        -30255062266.23813,
+        -31689093722.455017,
+        -29473916790.978577,
+        -36455037483.052536
+      ]
+    },
+    "r2": {
+      "mean": 0.7448784306139211,
+      "std": 0.02730574721126578,
+      "scores": [
+        0.7090091612897105,
+        0.7842417490538556,
+        0.7287284466341817,
+        0.7678051255149905,
+        0.7346076705768673
+      ]
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "sqft_living",
+      "importance_mean": 0.12637722317210795,
+      "importance_std": 0.0056031169277618535
+    },
+    {
+      "feature": "sqft_above",
+      "importance_mean": 0.12311483128706624,
+      "importance_std": 0.005293539870840711
+    },
+    {
+      "feature": "farm_ppltn_qty",
+      "importance_mean": 0.11347281513692078,
+      "importance_std": 0.0139359481194714
+    },
+    {
+      "feature": "per_non_farm",
+      "importance_mean": 0.10365710802123618,
+      "importance_std": 0.010298155274109893
+    },
+    {
+      "feature": "per_urbn",
+      "importance_mean": 0.10316015530240889,
+      "importance_std": 0.011424081539557679
+    },
+    {
+      "feature": "non_farm_qty",
+      "importance_mean": 0.07702338152357625,
+      "importance_std": 0.009924143039346332
+    },
+    {
+      "feature": "sqft_lot",
+      "importance_mean": 0.07103532779506125,
+      "importance_std": 0.010142599218829028
+    },
+    {
+      "feature": "bathrooms",
+      "importance_mean": 0.03581178535487491,
+      "importance_std": 0.0039184799259864775
+    },
+    {
+      "feature": "hous_val_amt",
+      "importance_mean": 0.033942580007629675,
+      "importance_std": 0.0056539118594623045
+    },
+    {
+      "feature": "per_less_than_9",
+      "importance_mean": 0.03370375636068897,
+      "importance_std": 0.0030856903618048247
+    },
+    {
+      "feature": "sbrbn_ppltn_qty",
+      "importance_mean": 0.023076519830374898,
+      "importance_std": 0.00690116919122317
+    },
+    {
+      "feature": "sqft_basement",
+      "importance_mean": 0.02176677953982087,
+      "importance_std": 0.0031284092595552935
+    },
+    {
+      "feature": "medn_incm_per_prsn_amt",
+      "importance_mean": 0.015700137158392292,
+      "importance_std": 0.006075609735596518
+    },
+    {
+      "feature": "per_some_clg",
+      "importance_mean": 0.013100981486278019,
+      "importance_std": 0.0013224119632354436
+    },
+    {
+      "feature": "bedrooms",
+      "importance_mean": 0.011345817612169707,
+      "importance_std": 0.005668985254187067
+    },
+    {
+      "feature": "per_assoc",
+      "importance_mean": 0.0046336151568071695,
+      "importance_std": 0.003015115509365915
+    },
+    {
+      "feature": "edctn_less_than_9_qty",
+      "importance_mean": 0.003673853111760861,
+      "importance_std": 0.0013582752069454863
+    },
+    {
+      "feature": "medn_hshld_incm_amt",
+      "importance_mean": 0.0032487125458367182,
+      "importance_std": 0.002679308880128048
+    },
+    {
+      "feature": "per_hsd",
+      "importance_mean": 0.003050148780310946,
+      "importance_std": 0.001870155898586683
+    },
+    {
+      "feature": "edctn_assoc_dgre_qty",
+      "importance_mean": 0.00302018432462976,
+      "importance_std": 0.0013838311820941684
+    }
+  ],
+  "model_type": "KNeighborsRegressor",
+  "model_params": {
+    "algorithm": "auto",
+    "leaf_size": 30,
+    "metric": "minkowski",
+    "metric_params": null,
+    "n_jobs": null,
+    "n_neighbors": 5,
+    "p": 2,
+    "weights": "uniform"
+  }
+}
