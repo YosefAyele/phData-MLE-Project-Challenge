@@ -5,7 +5,7 @@ A FastAPI-based REST service for predicting house prices in the Seattle area usi
 ## 🚀 Quick Start to run and see it in action
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/YosefAyele/phData-MLE-Project-Challenge.git
 cd mle-project-challenge-2
 ./scripts/build.sh && ./scripts/deploy.sh
 ```
