@@ -2,6 +2,17 @@
 
 A FastAPI-based REST service for predicting house prices in the Seattle area using machine learning.
 
+## 🚀 Quick Start to run and see it in action
+
+```bash
+git clone <repo-url>
+cd mle-project-challenge-2
+./scripts/build.sh && ./scripts/deploy.sh
+```
+
+API available at: http://localhost:8000  
+Documentation: http://localhost:8000/docs
+
 ## Quick Start
 
 ### 1. Install Dependencies

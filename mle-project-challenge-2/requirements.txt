@@ -1,6 +1,7 @@
 # FastAPI and web server dependencies
 fastapi>=0.104.0
 uvicorn[standard]>=0.24.0
+gunicorn>=21.2.0
 pydantic>=2.0.0
 
 # Core ML and data dependencies (from conda environment)

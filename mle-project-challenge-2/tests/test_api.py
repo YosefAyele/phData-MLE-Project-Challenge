@@ -22,44 +22,44 @@ class HousePriceAPITester:
     
     def test_health_check(self) -> bool:
         """Test the health check endpoint."""
-        print("🏥 Testing health check endpoint...")
+        print("Testing health check endpoint...")
         try:
             response = self.session.get(f"{self.base_url}/health")
             if response.status_code == 200:
                 health_data = response.json()
-                print(f"   ✅ Health check passed: {health_data['status']}")
-                print(f"   📊 Model loaded: {health_data['model_loaded']}")
-                print(f"   📊 Demographics loaded: {health_data['demographics_loaded']}")
+                print(f" Health check passed: {health_data['status']}")
+                print(f" Model loaded: {health_data['model_loaded']}")
+                print(f" Demographics loaded: {health_data['demographics_loaded']}")
                 return True
             else:
-                print(f"   ❌ Health check failed: {response.status_code}")
+                print(f" Health check failed: {response.status_code}")
                 return False
         except Exception as e:
-            print(f"   ❌ Health check error: {e}")
+            print(f" Health check error: {e}")
             return False
     
     def test_model_info(self) -> bool:
         """Test the model info endpoint."""
-        print("📊 Testing model info endpoint...")
+        print("Testing model info endpoint...")
         try:
             response = self.session.get(f"{self.base_url}/model/info")
             if response.status_code == 200:
                 model_info = response.json()
-                print(f"   ✅ Model type: {model_info['model_type']}")
-                print(f"   📈 Features count: {model_info['features_count']}")
-                print(f"   🎯 R² Score: {model_info['performance_metrics'].get('r2', 'N/A'):.4f}")
-                print(f"   💰 MAE: ${model_info['performance_metrics'].get('mae', 'N/A'):,.0f}")
+                print(f" Model type: {model_info['model_type']}")
+                print(f" Features count: {model_info['features_count']}")
+                print(f" R² Score: {model_info['performance_metrics'].get('r2', 'N/A'):.4f}")
+                print(f" MAE: ${model_info['performance_metrics'].get('mae', 'N/A'):,.0f}")
                 return True
             else:
-                print(f"   ❌ Model info failed: {response.status_code}")
+                print(f"Model info failed: {response.status_code}")
                 return False
         except Exception as e:
-            print(f"   ❌ Model info error: {e}")
+            print(f"   Model info error: {e}")
             return False
     
     def load_test_data(self) -> List[Dict[str, Any]]:
         """Load test data from future_unseen_examples.csv."""
-        print("📂 Loading test data...")
+        print("Loading test data...")
         try:
             df = pd.read_csv(FUTURE_EXAMPLES_PATH)
             
@@ -79,16 +79,16 @@ class HousePriceAPITester:
                     elif key == 'zipcode':
                         example[key] = str(int(value)).zfill(5)  # Ensure 5-digit zipcode
             
-            print(f"   ✅ Loaded {len(test_examples)} test examples")
+            print(f"Loaded {len(test_examples)} test examples")
             return test_examples
             
         except Exception as e:
-            print(f"   ❌ Failed to load test data: {e}")
+            print(f"  Failed to load test data: {e}")
             return []
     
     def test_single_prediction(self, house_data: Dict[str, Any]) -> bool:
         """Test single house prediction."""
-        print(f"🏠 Testing single prediction for zipcode {house_data['zipcode']}...")
+        print(f"Testing single prediction for zipcode {house_data['zipcode']}...")
         try:
             payload = {
                 "house_features": house_data
@@ -103,23 +103,23 @@ class HousePriceAPITester:
                 predicted_price = result['predicted_price']
                 metadata = result['prediction_metadata']
                 
-                print(f"   ✅ Predicted price: ${predicted_price:,.2f}")
-                print(f"   ⏱️  Response time: {response_time:.1f}ms")
-                print(f"   📊 Demographics found: {metadata['zipcode_demographics_found']}")
-                print(f"   🏠 Features: {house_data['bedrooms']}BR/{house_data['bathrooms']}BA, {house_data['sqft_living']}sqft")
+                print(f"  Predicted price: ${predicted_price:,.2f}")
+                print(f"    Response time: {response_time:.1f}ms")
+                print(f"  Demographics found: {metadata['zipcode_demographics_found']}")
+                print(f"  Features: {house_data['bedrooms']}BR/{house_data['bathrooms']}BA, {house_data['sqft_living']}sqft")
                 return True
             else:
-                print(f"   ❌ Prediction failed: {response.status_code}")
-                print(f"   💬 Response: {response.text}")
+                print(f" Prediction failed: {response.status_code}")
+                print(f" Response: {response.text}")
                 return False
                 
         except Exception as e:
-            print(f"   ❌ Prediction error: {e}")
+            print(f" Prediction error: {e}")
             return False
     
     def test_minimal_prediction(self, house_data: Dict[str, Any]) -> bool:
         """Test minimal house prediction."""
-        print(f"🏠 Testing minimal prediction for zipcode {house_data['zipcode']}...")
+        print(f"Testing minimal prediction for zipcode {house_data['zipcode']}...")
         try:
             # Extract only minimal features
             minimal_features = {
@@ -145,21 +145,21 @@ class HousePriceAPITester:
                 result = response.json()
                 predicted_price = result['predicted_price']
                 
-                print(f"   ✅ Minimal predicted price: ${predicted_price:,.2f}")
-                print(f"   ⏱️  Response time: {response_time:.1f}ms")
+                print(f" Minimal predicted price: ${predicted_price:,.2f}")
+                print(f" Response time: {response_time:.1f}ms")
                 return True
             else:
-                print(f"   ❌ Minimal prediction failed: {response.status_code}")
-                print(f"   💬 Response: {response.text}")
+                print(f"  Minimal prediction failed: {response.status_code}")
+                print(f"  Response: {response.text}")
                 return False
                 
         except Exception as e:
-            print(f"   ❌ Minimal prediction error: {e}")
+            print(f" Minimal prediction error: {e}")
             return False
     
     def test_batch_prediction(self, houses_data: List[Dict[str, Any]]) -> bool:
         """Test batch house prediction."""
-        print(f"🏘️  Testing batch prediction for {len(houses_data)} houses...")
+        print(f"Testing batch prediction for {len(houses_data)} houses...")
         try:
             payload = {
                 "houses": houses_data[:5]  # Test with first 5 houses
@@ -174,46 +174,46 @@ class HousePriceAPITester:
                 predictions = result['predictions']
                 batch_metadata = result['batch_metadata']
                 
-                print(f"   ✅ Batch prediction successful")
-                print(f"   🏠 Houses processed: {batch_metadata['batch_size']}")
-                print(f"   ⏱️  Total time: {response_time:.1f}ms")
-                print(f"   📊 Avg time per house: {batch_metadata['average_time_per_prediction_ms']:.1f}ms")
+                print(f"  Batch prediction successful")
+                print(f"  Houses processed: {batch_metadata['batch_size']}")
+                print(f"  Total time: {response_time:.1f}ms")
+                print(f"  Avg time per house: {batch_metadata['average_time_per_prediction_ms']:.1f}ms")
                 
                 # Show sample predictions
                 for i, prediction in enumerate(predictions[:3]):
                     price = prediction['predicted_price']
-                    print(f"   💰 House {i+1}: ${price:,.2f}")
+                    print(f"  House {i+1}: ${price:,.2f}")
                 
                 return True
             else:
-                print(f"   ❌ Batch prediction failed: {response.status_code}")
-                print(f"   💬 Response: {response.text}")
+                print(f"  Batch prediction failed: {response.status_code}")
+                print(f"  Response: {response.text}")
                 return False
                 
         except Exception as e:
-            print(f"   ❌ Batch prediction error: {e}")
+            print(f" Batch prediction error: {e}")
             return False
     
     def test_zipcodes_endpoint(self) -> bool:
         """Test the available zipcodes endpoint."""
-        print("📫 Testing zipcodes endpoint...")
+        print("Testing zipcodes endpoint...")
         try:
             response = self.session.get(f"{self.base_url}/zipcodes")
             if response.status_code == 200:
                 zipcodes = response.json()
-                print(f"   ✅ Available zipcodes: {len(zipcodes)}")
-                print(f"   📋 Sample zipcodes: {zipcodes[:5]}")
+                print(f" Available zipcodes: {len(zipcodes)}")
+                print(f" Sample zipcodes: {zipcodes[:5]}")
                 return True
             else:
-                print(f"   ❌ Zipcodes endpoint failed: {response.status_code}")
+                print(f" Zipcodes endpoint failed: {response.status_code}")
                 return False
         except Exception as e:
-            print(f"   ❌ Zipcodes endpoint error: {e}")
+            print(f" Zipcodes endpoint error: {e}")
             return False
     
     def run_comprehensive_test(self) -> None:
         """Run all tests comprehensively."""
-        print("🚀 Starting comprehensive API testing...\n")
+        print("Starting comprehensive API testing...\n")
         
         # Track test results
         test_results = {}
@@ -233,7 +233,7 @@ class HousePriceAPITester:
         # Load test data
         test_data = self.load_test_data()
         if not test_data:
-            print("❌ Cannot proceed without test data")
+            print("Cannot proceed without test data")
             return
         print()
         
@@ -250,31 +250,31 @@ class HousePriceAPITester:
         print()
         
         # Summary
-        print("📋 Test Results Summary:")
+        print("Test Results Summary:")
         print("=" * 50)
         
         for test_name, result in test_results.items():
-            status = "✅ PASS" if result else "❌ FAIL"
+            status = "PASS" if result else "FAIL"
             print(f"   {test_name.replace('_', ' ').title()}: {status}")
         
         total_tests = len(test_results)
         passed_tests = sum(test_results.values())
         
-        print(f"\n🎯 Overall: {passed_tests}/{total_tests} tests passed")
+        print(f"\nOverall: {passed_tests}/{total_tests} tests passed")
         
         if passed_tests == total_tests:
-            print("🎉 All tests passed! API is working correctly.")
+            print("All tests passed! API is working correctly.")
         else:
-            print("⚠️  Some tests failed. Check the API service.")
+            print("Some tests failed. Check the API service.")
 
 
 def main():
     """Main function to run API tests."""
-    print("🏠 House Price Prediction API Tester")
+    print("House Price Prediction API Tester")
     print("=" * 50)
     
     # Instructions for running the API
-    print("\n📋 Instructions:")
+    print("\nInstructions:")
     print("1. Make sure the API server is running:")
     print("   cd /path/to/project")
     print("   python -m uvicorn app.main:app --reload")
